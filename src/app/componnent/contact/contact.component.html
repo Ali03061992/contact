@@ -1,0 +1,64 @@
+<div class="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-md">
+    <!-- Formulaire d'envoi de SMS -->
+    <div *ngIf="!showMessage" class="space-y-6">
+      <!-- Sélection du pays -->
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-2">Pays</label>
+        <select
+          [(ngModel)]="selectedCountry"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option *ngFor="let country of countries" [value]="country.dialCode">
+            {{ country.name }} ({{ country.dialCode }})
+          </option>
+        </select>
+      </div>
+  
+      <!-- Champ de numéro de téléphone -->
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-2">Numéro de téléphone</label>
+        <input
+          type="text"
+          [(ngModel)]="phoneNumber"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Entrez votre numéro"
+        />
+      </div>
+  
+      <!-- Bouton d'envoi -->
+      <button
+        (click)="sendSms()"
+        class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-200"
+      >
+        Envoyer SMS
+      </button>
+    </div>
+  
+    <!-- Message de succès -->
+    <div *ngIf="showMessage" class="mt-6 space-y-4">
+      <p class="text-green-600 font-medium">{{ message }}</p>
+  
+      <!-- Lien généré -->
+      <div *ngIf="link" class="space-y-4">
+        <p class="text-gray-700">
+          Lien: <a [href]="link" target="_blank" class="text-blue-500 underline hover:text-blue-600">{{ link }}</a>
+        </p>
+  
+        <!-- Boutons d'actions -->
+        <div class="flex space-x-4">
+          <button
+            (click)="copyLink()"
+            class="flex-1 bg-gray-500 text-white p-2 rounded-lg hover:bg-gray-600 transition duration-200"
+          >
+            Copier le lien
+          </button>
+          <button
+            (click)="showMessage = false"
+            class="flex-1 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-200"
+          >
+            Retour
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
