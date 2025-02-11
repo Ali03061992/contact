@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SocketService } from '../../services/socket.service';
+import { Router } from '@angular/router';
 
 interface Country {
   code: string;
@@ -27,7 +29,7 @@ export class ContactComponent implements OnInit {
   link: string = '';
   showMessage: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private socketService : SocketService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -49,6 +51,7 @@ export class ContactComponent implements OnInit {
           this.message = "Un message a été envoyé avec succès.";
           this.link = response.link || '';
           this.showMessage = true;
+          this.router.navigate([`/call/${this.link}`]);
           this.resetForm();
         },
         error => {

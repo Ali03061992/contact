@@ -1,0 +1,14 @@
+<div class="video-chat-container">
+    <h2>Video Chat Room: {{ roomId }}</h2>
+    <div class="video-wrapper">
+      <div>
+        <h3>Your Video</h3>
+        <video #localVideo muted autoplay playsinline style="width: 300px; border: 1px solid #ccc;"></video>
+      </div>
+      <div>
+        <h3>Remote Video</h3>
+        <video #remoteVideo autoplay playsinline style="width: 300px; border: 1px solid #ccc;"></video>
+      </div>
+    </div>
+  </div>
+  
